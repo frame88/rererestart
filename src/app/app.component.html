@@ -1,0 +1,108 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" [disabled]="!auth.isLogged()">
+    <ion-menu contentId="main-content" color="tertiary" type="overlay">
+      <ion-content>
+        <ion-list lines="none">
+
+          <!-- prima parte (nome-cognome-email-esci-foto) -->
+          <ion-item>
+            <div id="button-exit-ondx">
+              <div class="container-header-user">
+                <!-- immagine + nome e stato -->
+                <div>
+                  <ion-avatar id="avatar-profile" slot="start">
+                    <img alt="immagine profilo" src="https://i.pravatar.cc/300" />
+                    <div id="shot-user"></div>
+                  </ion-avatar>
+                </div>
+                <div>
+                  <div id="container-name-surname">
+                    <div class="ion-margin-start">
+                      <h1 class="ion-no-margin">{{auth.userData.name}}</h1>
+                      <h1 class="ion-no-margin">{{auth.userData.surname}}</h1>
+                    </div>
+                    <div style="display: flex; justify-content: center; width: 100%;">
+                      <!-- <img style="width: 30px; padding: 10px;" src="../assets/images/intellitronika-symbol.svg" alt="logo intellitronika"> -->
+                    </div>
+                  </div>
+                  <div color="medium" class="ion-margin-start">
+                    <h4 class="status-text">{{statusUser}}</h4>
+                  </div>
+                </div>
+              </div>
+              <!-- email -->
+              <ion-row class="container-email">
+                <a class="mailto" href="mailto:{{ auth.userData.email }}">{{auth.userData.email}}</a>
+              </ion-row>
+              <!-- logout -->
+              <ion-row class="ion-margin-top ion-justify-content-end">
+                <!-- <ion-icon style="color: rgb(169, 3, 3);" id="icon-logout" name="log-out"></ion-icon> -->
+                <ion-icon style="color: rgb(169, 3, 3);" id="icon-logout" name="power-outline"></ion-icon>
+                <small style="display: block; color: rgb(169, 3, 3); cursor: pointer;"
+                  (click)="auth.logout()">Esci</small>
+              </ion-row>
+            </div>
+          </ion-item>
+
+          <!-- da aggiungere dopo "ngForm"  -->
+          <form #f="ngForm" (submit)="searchAsso(f.value.associate)" class="ion-padding-bottom">
+            <ion-searchbar [ngModel] name="associate" color="medium" placeholder="Cerca un collega..."></ion-searchbar>
+            <ion-button color="primary" type="submit">
+              <ion-icon color="dark" name="checkmark-circle"></ion-icon>
+            </ion-button>
+          </form>
+
+          <ion-row>
+            <ion-title>
+              Messaggi
+            </ion-title>
+          </ion-row>
+          <ion-row class="ion-justify-content-end">
+            <!-- <ion-button type="submit" name="me" (submit)="searchAsso($event)"><ion-icon name="person"></ion-icon></ion-button> -->
+            <!--  -->
+            <ion-button (click)="returnMe()" type="submit" name="me">
+              <ion-icon name="person"></ion-icon>
+            </ion-button>
+            <ion-button>
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-row>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of auth.sideMenuUsers; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected" class="online-users" (click)="clearNotifications (p)">
+              <ion-avatar slot="start">
+                <img alt="img profile associate" src="https://i.pravatar.cc/300" />
+              </ion-avatar>
+              <ion-label>{{ p.user }}</ion-label>
+              <small *ngIf="this.auth.now - this.auth.sideMenuUsers[i].timestamp >= 5000">Ultimo accesso alle
+                {{p.timestamp | date:'HH:mm'}}</small>
+              <small *ngIf="this.auth.now - this.auth.sideMenuUsers[i].timestamp <= 5000">
+                <div id="shot-associate"></div>
+              </small>
+              <ion-badge *ngIf="p.notifications">{{p.notifications}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+
+      <!--  form per aggionramento-stato -->
+      <div class="ion-margin-bottom ion-padding-bottom">
+        <ion-label class="ion-text-center ion-padding-start">
+          <p>Aggiorna il tuo stato <ion-icon name="brush"></ion-icon>
+          </p>
+        </ion-label>
+        <!-- da aggiungere dopo ngform: (submit)="add(f.value.stato)" -->
+        <form style="display: flex;" #g="ngForm" (submit)="add(g.value.stato)" class="formwbutton ion-padding-start ion-padding-end">
+          <ion-input id="searchbar-status" color="dark" [ngModel] name="stato" placeholder="modifica..."></ion-input>
+          <ion-button color="primary" type="submit" fill="clear">
+            <ion-icon color="primary" name="checkmark-circle"></ion-icon>
+          </ion-button>
+        </form>
+      </div>
+
+
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+

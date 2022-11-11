@@ -1,0 +1,7 @@
+{
+  "name": "rerestart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

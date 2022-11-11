@@ -1,0 +1,123 @@
+ion-menu-button {
+  color: var(--main-color);
+}
+
+
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+.chat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+// .ion-textarea{
+//   max-width: 70%;
+//   border: .5px solid rgb(183, 183, 183);
+//   background-color: red;
+// }
+.message {
+  margin: .5em 3.5em 0;
+  flex-grow: 0;
+  border-radius: 6px;
+  padding: .7em;
+  max-width: 40%;
+}
+
+.received-message {
+  background-color: #fbe1cc;
+
+}
+
+.my-message {
+  // erika style
+  // align-self: flex-end;
+  // background-color: #efcaca;
+    background-color: rgb(89, 150, 255);
+    color: white;
+    padding: 1em;
+    border-radius: 15px 15px 3px 15px;
+    align-self: end;
+    margin-right: 1em;
+}
+
+//messaggi importati da ionic-first-chat
+.box-message {
+  position: relative;
+  text-align: left;
+  padding: 0.8em;
+  max-width: 55%;
+  //border: 3px solid rgba(89, 0, 255, 0.479);
+  //border: 2px solid rgba(255, 255, 255, 0.418);
+
+
+  .time-message {
+    position: absolute;
+    right: 1em;
+    bottom: 0;
+    font-size: 80%;
+    padding-bottom: 3px;
+  }
+}
+
+.received {
+  background-color: #FFCA59;
+  border-radius: 15px 15px 15px 3px;
+  align-self: start;
+  // background-color: rgb(255, 245, 148);
+  // box-shadow: 15px 20px 25px rgba(231, 214, 231, 0.267);
+}
+
+.sent {
+  // box-shadow: -15px 20px 25px rgba(231, 214, 231, 0.267);
+  background-color: rgb(89, 150, 255);
+  color: white;
+  padding: 1em;
+  border-radius: 15px 15px 3px 15px;
+  align-self: end;
+  margin-right: 1em;
+}
+
+ion-input {
+  border-radius: 15px 5px 5px 15px;
+  border: 2px solid rgba(255, 255, 255, 0.267);
+  width: 100%;
+  margin-bottom: 0.5em;
+  max-height: 15vh;
+  overflow-y: scroll;
+}
+
+.invia {
+  padding-left: 1em;
+  padding-right: 1em;
+  // background: linear-gradient(45deg, #bed6ff, #3880ff );
+  background-color: #3880ff;
+  border-radius: 0 15px 15px 0;
+  color: azure;
+  height: 36px;
+  margin-right: 1em;
+}
+
+#bg-intell {
+  background-image: url('/assets/images/intellitronika-symbol.svg');
+  background-repeat: no-repeat;
+  background-size: 30%;
+  background-position: center;
+  background-attachment: scroll!important;
+}

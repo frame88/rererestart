@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" class="ion-margin-bottom">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-title>{{chatUserName}}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content lines="none">
+  <div *ngIf="messages" id="bg-intell" class="chat-container" #scrollMe  lines="none"
+    class="chat-container" style="display: flex; flex-direction: column;">
+    <div class="box-message ion-margin-bottom ion-margin-start" [ngClass]="{'received': message.sender === this.chatUserName,
+      'my-message': message.sender === myUser }" *ngFor="let message of messages">
+      <div class="ion-margin-bottom">
+        <span>{{message.text}}</span>
+      </div>
+      <span class="time-message">{{message.timestamp | date:'HH:mm'}}</span>
+    </div>
+  </div>
+</ion-content>
+
+<!-- input area invio messaggi -->
+<div id="container" *ngIf="chatUserName !== ''">
+  <form [formGroup]="messageForm" (ngSubmit)="sendmsg(messageForm.value.msg)">
+    <ion-item>
+      <ion-input id='message-form' formControlName="msg" name="description"
+        [placeholder]="auth.now - this.chatUserInfo.timestamp >= 5000 ? 'Utente offline' : '   Scrivi qualcosa...'"
+        [disabled]="auth.now - this.chatUserInfo.timestamp >= 5000" autoGrow></ion-input>
+      <button class="invia" type="submit" [disabled]="messageForm.invalid">Invia</button>
+    </ion-item>
+  </form>
+</div>
+
+
+
+
